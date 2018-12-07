@@ -15,7 +15,7 @@ describe('TodosComponent', () => {
   });
 
   it('fill component via the gettodos', () => {
-    let todos = [ 1, 2, 3];
+    const todos = [ 1, 2, 3];
     spyOn( service, 'getTodos').and.callFake( () => {
       return Observable.from( [  todos ]); // 1 can also be object { id: 1, value: xxxx }
     });
@@ -27,7 +27,7 @@ describe('TodosComponent', () => {
   });
 
   it('expect a call to the add method save the changes', () => {
-    let spy = spyOn( service, 'add').and.callFake( t => {
+    const spy = spyOn( service, 'add').and.callFake( t => {
       return Observable.empty();
     });
 
@@ -38,8 +38,8 @@ describe('TodosComponent', () => {
 
   // Manier 1
   it('expect add to return id from server', () => {
-    let todo = { id: 1};
-    let spy = spyOn( service, 'add').and.callFake( t => {
+    const todo = { id: 1};
+    const spy = spyOn( service, 'add').and.callFake( t => {
       return Observable.from( [ todo ]);
     });
 
@@ -50,8 +50,8 @@ describe('TodosComponent', () => {
 
   // Manier 2
   it('expect add to return id from server2', () => {
-    let todo = { id: 1};
-    let spy = spyOn( service, 'add').and.returnValue( Observable.from( [ todo ]));
+    const todo = { id: 1};
+    const spy = spyOn( service, 'add').and.returnValue( Observable.from( [ todo ]));
 
     component.add();
 
@@ -59,8 +59,8 @@ describe('TodosComponent', () => {
   });
 
   it('expect error message text to be put in the message property', () => {
-    let errorMessage = 'error message tester1';
-    let spy = spyOn( service, 'add').and.returnValue( Observable.throw( errorMessage));
+    const errorMessage = 'error message tester1';
+    const spy = spyOn( service, 'add').and.returnValue( Observable.throw( errorMessage));
 
     component.add();
 
