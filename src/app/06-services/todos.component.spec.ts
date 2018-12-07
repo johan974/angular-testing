@@ -66,4 +66,24 @@ describe('TodosComponent', () => {
 
     expect( component.message).toBe( errorMessage);
   });
+
+  it('delete on server is called after positive confirm', () => {
+    const win = spyOn( window, 'confirm').and.returnValue( true);
+    const spy = spyOn( service, 'delete').and.returnValue( Observable.empty());
+
+    component.delete( 1);
+
+    // expect( spy).toHaveBeenCalled();
+    expect( spy).toHaveBeenCalledWith(1);
+  });
+
+  it('NO !! delete on server is called on CANCEL', () => {
+    const win = spyOn( window, 'confirm').and.returnValue( false);
+    const spy = spyOn( service, 'delete').and.returnValue( Observable.empty());
+
+    component.delete( 1);
+
+    // expect( spy).toHaveBeenCalled();
+    expect( spy).not.toHaveBeenCalledWith(1);
+  });
 });
